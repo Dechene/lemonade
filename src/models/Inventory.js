@@ -12,18 +12,20 @@ export default class Inventory {
     w6,
     w54,
     w32,
-    w1
+    w1,
+    icon
   ) {
     const item = {
       item: description,
-      quantity: quantity,
-      cost: cost,
-      sell: sell,
-      wasted: wasted,
-      w6: w6,
-      w54: w54,
-      w32: w32,
-      w1: w1,
+      quantity,
+      cost,
+      sell,
+      wasted,
+      w6,
+      w54,
+      w32,
+      w1,
+      icon
     };
 
     this.stock.push(item);

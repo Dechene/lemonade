@@ -17,28 +17,36 @@
 
   <body>
     <div class="wrapper clearfix">
-      <div class="buy-panel active">
-        <div class="buy-name">Inventory</div>
-        
-        <div>
-          <table class="inventory-pricelist">
-            <tr class="item" data-item="title"><td>Item</td><td>Quantity</td><td>Buy Price</td><td>Sell Price</td></tr>
-            <!-- <tr><td>Pepsi</td><td>20</td><td>$2</td><td>$4</td></tr>          
-            <tr><td>Chips</td><td>20</td><td>$2</td><td>$4</td></tr>          
-            <tr><td>Tea</td><td>20</td><td>$2</td><td>$4</td></tr>          
-            <tr><td>Chips</td><td>20</td><td>$2</td><td>$4</td></tr>          
-            <tr><td>HotDogs</td><td>20</td><td>$2</td><td>$4</td></tr>           -->
-            </table>
+      <div class="left-panel active">
+
+        <div id="account">
+
+          <div class="account-heading">Account Balance:</div>
           <div class="inventory-summary">
             You are on Day 1 of 10, and you currently have $100.
           </div>
+
+          <div id="toast">Popup message</div>
+
+          <div class="inventory-images">
+            <div class="dropdown"><img id="id-burger" class="stock" height='75px' width='75px' />    </div>
+            <div class="dropdown"><img id="id-softdrink" class="stock"  height='75px' width='75px' /> </div>
+            <div class="dropdown"><img id="id-icecream" class="stock"  height='75px' width='75px' />  </div>
+            <div class="dropdown"><img id="id-hotdog" class="stock"  height='75px' width='75px' />    </div>
+            <div class="dropdown"><img id="id-donut" class="stock"  height='75px' width='75px' />     </div>
+            <div class="dropdown"><img id="id-chips" class="stock"   height='75px' width='75px'/>     </div>
+          </div>
+
+          <button class="btn-nextDay"><i class="ion-ios-loop"></i>Play next day!</button>
         </div>
+        
+        
       </div>
 
-      <div class="sell-panel active">
+      <div class="right-panel active">
         <div class="sell-title"">Results...</div>
         <div>
-          <table class="sell-pricelist"> 
+          <table class="sell-ledger"> 
             <tr><td>Item</td>     <td>Sell Price</td> <td>Number Sold</td> <td>Profit</td></tr> 
             <!-- <tr><td>Pepsi</td>    <td>$4</td>         <td>4</td>          <td>$4</td></tr>          
             <tr><td>Chips</td>    <td>$4</td>         <td>4</td>          <td>$4</td></tr>          
@@ -55,11 +63,12 @@
       <button class="btn-new">
         <i class="ion-ios-plus-outline"></i>New game
       </button>
-      <button class="btn-nextDay"><i class="ion-ios-loop"></i>Play next day!</button>
 
-      <div id="toast">Popup message</div>
+      
 
     </div>
-  
+    
+    <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 </html>
+

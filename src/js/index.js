@@ -6,12 +6,20 @@ import * as inventoryView from "./../views/inventoryView";
 
 import "./../css/style.css";
 
+import imgBurger from "../img/burger.png";
+import imgSoftdrink from "../img/softdrink.png";
+import imgIcecream from "../img/icecream.png";
+import imgHotdog from "../img/hotdog.png";
+import imgDonut from "../img/donut.png";
+import imgChips from "../img/chips.png";
+
 /* Global state of the app
     - Current day
     - Current balance
     - Inventory details
     - The days weather
  */
+
 init();
 /*
  **
@@ -28,25 +36,42 @@ function init() {
   // testing purposes only
   window.state = state;
 
-  state.stock.addItem("soft drink", 0, 1, 2, false, 200, 120, 80, 40);
-  state.stock.addItem("icecream", 0, 2, 4, false, 250, 160, 80, 60);
-  state.stock.addItem("hotdogs", 0, 1, 3, true, 20, 40, 80, 110);
-  state.stock.addItem("jam donuts", 0, 1, 3, false, 20, 40, 80, 110);
-  state.stock.addItem("hot chips", 0, 1, 2, true, 160, 220, 200, 220);
+  state.stock.addItem(
+    "soft drink",
+    0,
+    1,
+    2,
+    false,
+    200,
+    120,
+    80,
+    40,
+    "softdrink"
+  );
+  state.stock.addItem("icecream", 0, 2, 4, false, 250, 160, 80, 60, "icecream");
+  state.stock.addItem("hotdogs", 0, 1, 3, true, 20, 40, 80, 110, "hotdog");
+  state.stock.addItem("cheeseburger", 0, 1, 3, true, 20, 40, 80, 110, "burger");
+  state.stock.addItem("jam donuts", 0, 1, 3, false, 20, 40, 80, 110, "donut");
+  state.stock.addItem("hot chips", 0, 1, 2, true, 160, 220, 200, 220, "chips");
 
-  //output the stock
   updateUI();
 }
 
 function updateUI() {
+  let markup = "";
   //clear current markup
   inventoryView.clearInventory();
 
   // update inventory and sales tables
   state.stock.stock.forEach(el => {
-    inventoryView.renderInventory(el);
-    if (state.env.curDay > 0) inventoryView.renderSales(el);
+    inventoryView.renderInventoryImages(el);
+    if (state.env.curDay > 0) {
+      markup += inventoryView.renderSale(el);
+    }
   });
+
+  if (markup) inventoryView.renderSales(markup);
+  console.log(markup);
 
   // update inventory summary and title
   inventoryView.renderInventorySummary(state.env.curDay, state.balance);
@@ -114,17 +139,17 @@ elements.nextDay.addEventListener("click", e => {
   processDay();
 });
 
-elements.inventoryList.addEventListener("click", e => {
+elements.inventoryImages.addEventListener("click", e => {
   // user has clicked to buy an item
   const item = e.target.dataset.item;
-  const quantity = e.target.dataset.quantity;
+  const quantity = parseInt(e.target.dataset.quantity, 10);
 
   promptPurchase(item, quantity);
 });
 
 function toast(message) {
   // Add the "show" class to DIV and set the message
-  elements.toast.innerText = (message);
+  elements.toast.innerText = message;
   elements.toast.classList.toggle("show");
 
   // After 3 seconds, remove the show class from DIV
