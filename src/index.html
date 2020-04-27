@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300,600"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="./css/style.css">
+
+  <body>
+    <div class="wrapper clearfix">
+      <div class="buy-panel active">
+        <div class="buy-name">Inventory</div>
+        
+        <div>
+          <table class="inventory-pricelist">
+            <tr class="item" data-item="title"><td>Item</td><td>Quantity</td><td>Buy Price</td><td>Sell Price</td></tr>
+            <!-- <tr><td>Pepsi</td><td>20</td><td>$2</td><td>$4</td></tr>          
+            <tr><td>Chips</td><td>20</td><td>$2</td><td>$4</td></tr>          
+            <tr><td>Tea</td><td>20</td><td>$2</td><td>$4</td></tr>          
+            <tr><td>Chips</td><td>20</td><td>$2</td><td>$4</td></tr>          
+            <tr><td>HotDogs</td><td>20</td><td>$2</td><td>$4</td></tr>           -->
+            </table>
+          <div class="inventory-summary">
+            You are on Day 1 of 10, and you currently have $100.
+          </div>
+        </div>
+      </div>
+
+      <div class="sell-panel active">
+        <div class="sell-title"">Results...</div>
+        <div>
+          <table class="sell-pricelist"> 
+            <tr><td>Item</td>     <td>Sell Price</td> <td>Number Sold</td> <td>Profit</td></tr> 
+            <!-- <tr><td>Pepsi</td>    <td>$4</td>         <td>4</td>          <td>$4</td></tr>          
+            <tr><td>Chips</td>    <td>$4</td>         <td>4</td>          <td>$4</td></tr>          
+            <tr><td>Tea</td>      <td>$4</td>         <td>4</td>          <td>$4</td></tr>          
+            <tr><td>Chips</td>    <td>$4</td>         <td>4</td>          <td>$4</td></tr>          
+            <tr><td>HotDogs</td>  <td>$4</td>         <td>4</td>         <td>$4</td></tr> -->
+          </table>
+          <div class="sell-summary">
+            Get ready, it's almost game day!
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-new">
+        <i class="ion-ios-plus-outline"></i>New game
+      </button>
+      <button class="btn-nextDay"><i class="ion-ios-loop"></i>Play next day!</button>
+
+      <div id="toast">Popup message</div>
+
+    </div>
+  
+
+</html>
