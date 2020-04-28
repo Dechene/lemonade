@@ -3,20 +3,10 @@ export default class Inventory {
     this.stock = [];
   }
 
-  addItem(
-    description,
-    quantity,
-    cost = 2,
-    sell = 4,
-    wasted = false,
-    w6,
-    w54,
-    w32,
-    w1,
-    icon
-  ) {
-    const item = {
-      item: description,
+  // Add a new item to the store
+  addItem(item, quantity, cost, sell, wasted, w6, w54, w32, w1, iconname) {
+    const stock = {
+      item,
       quantity,
       cost,
       sell,
@@ -25,14 +15,14 @@ export default class Inventory {
       w54,
       w32,
       w1,
-      icon,
+      iconname,
     };
 
-    this.stock.push(item);
-    return item;
+    this.stock.push(stock);
+    return stock;
   }
 
-  // type === 'buy' || 'sell'
+  // Process a purchase or a sale, type === 'buy' || 'sell'
   processItem(description, quantity, type, balance) {
     let value = 0;
     const index = this.stock.findIndex(el => el.item === description);
@@ -55,13 +45,12 @@ export default class Inventory {
     return [value, quantity];
   }
 
-  getDemand(description, weather) {
+  // Find the daily demand for a particular item
+  getDemand(item, weather) {
     let demand = 0;
 
-    // get array item being sold
-    const index = this.stock.findIndex(el => el.item === description);
+    const index = this.stock.findIndex(el => el.item === item);
 
-    // get the demand for this item
     if (weather === 1) demand = this.stock[index].w1;
     if (weather === 3) demand = this.stock[index].w32;
     if (weather === 5) demand = this.stock[index].w54;
@@ -79,5 +68,5 @@ export default class Inventory {
       item.quantity = 0;
     }
     return waste;
-  };
+  }
 }

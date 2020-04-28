@@ -1,17 +1,19 @@
 export const elements = {
+  // Inventory side
   inventoryImages: document.querySelector(".inventory-images"),
-  inventorySummary: document.querySelector(".inventory-summary"),
+  balance: document.querySelector(".balance"),
 
+  // Sales side
   sellTitle: document.querySelector(".sell-title"),
   sellSummary: document.querySelector(".sell-summary"),
   sellLedger: document.querySelector(".sell-ledger"),
-  sellWaste: document.querySelector(".sell-waste"),
+  toast: document.getElementById("toast"),
 
+  // Buttons
   newGame: document.querySelector(".btn-new"),
   nextDay: document.querySelector(".btn-nextDay"),
 
-  toast: document.getElementById("toast"),
-
+  // Required to set the src for these later on
   burgerImg: document.getElementById("id-burger"),
   softdrinkImg: document.getElementById("id-softdrink"),
   icecreamImg: document.getElementById("id-icecream"),

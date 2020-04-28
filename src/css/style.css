@@ -57,21 +57,16 @@ body {
 /**********************************************
 *** SELL  
 **********************************************/
-
-.sell-report{
+.sell-summary {
+  overflow-y: auto;
+  height: 200px;
   background-color: #f2f2f2;
   color: black;
   font-size: 14px;
-
-}
-
-.sell-summary{
-  overflow-y:auto;
-  height: 200px;
 }
 
 /**********************************************
-*** buy
+*** BUY
 **********************************************/
 
 .buy-priceflist {
@@ -132,9 +127,6 @@ button {
 
 button:hover {
   font-weight: 600;
-}
-button:hover i {
-  margin-right: 20px;
 }
 
 button:focus {
@@ -331,7 +323,7 @@ button:focus {
   text-align: center;
 }
 
-.account-heading {
+.title {
   padding: 5px 10px;
   top: 0 px;
   right: 0 px;
@@ -342,8 +334,11 @@ button:focus {
 *** STOCK IMAGES 
 **********************************************/
 
-.stock {
+.stock,
+.football {
   transition: all 0.2s ease-in-out;
+  height: 75px;
+  width: 75px;
 }
 .stock:hover {
   transform: scale(1.1);
