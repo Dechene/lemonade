@@ -12,6 +12,7 @@ import imgIcecream from "../img/icecream.png";
 import imgHotdog from "../img/hotdog.png";
 import imgDonut from "../img/donut.png";
 import imgChips from "../img/chips.png";
+import imgFootball from "../img/football.png";
 
 /* Global state of the app
     - Current day
@@ -54,6 +55,8 @@ function init() {
   state.stock.addItem("jam donuts", 0, 1, 3, false, 20, 40, 80, 110, "donut");
   state.stock.addItem("hot chips", 0, 1, 2, true, 160, 220, 200, 220, "chips");
 
+  elements.footballImg.src = imgFootball;
+
   updateUI();
 }
 
@@ -65,25 +68,55 @@ function updateUI() {
   // update inventory and sales tables
   state.stock.stock.forEach(el => {
     inventoryView.renderInventoryImages(el);
+  });
+
+  // update inventory summary and title
+  inventoryView.renderInventorySummary(state.env.curDay, state.balance);
+}
+
+function dailyReport() {
+  inventoryView.clearSales();
+  let markup = "";
+
+  // update inventory and sales tables
+  state.stock.stock.forEach(el => {
     if (state.env.curDay > 0) {
       markup += inventoryView.renderSale(el);
     }
   });
 
-  if (markup) inventoryView.renderSales(markup);
-  console.log(markup);
-
-  // update inventory summary and title
-  inventoryView.renderInventorySummary(state.env.curDay, state.balance);
   if (state.env.curDay > 0) {
     inventoryView.renderSalesTitle(state.env.curDay);
-    inventoryView.renderSalesSummary(state.env.getWeatherDesc(), state.gross);
+
+    if (markup) inventoryView.renderSales(markup);
+
+    inventoryView.renderSalesHeader(
+      state.env.curDay,
+      state.env.getWeatherDesc()
+    );
+
+    //loop through all inventory for wastage
+    state.stock.stock.forEach(el => {
+      const quantity = state.stock.getWasted(el);
+      if (quantity > 0)
+        inventoryView.renderWastage(
+          state.env.curDay,
+          el.item,
+          quantity,
+          quantity * el.cost
+        );
+    });
+
+    inventoryView.renderSalesLedger(
+      state.env.curDay,
+      state.gross,
+      state.balance
+    );
   }
 }
 
 function promptPurchase(item, quantity) {
   const index = state.stock.stock.findIndex(el => el.item === item);
-
   const sale = state.stock.processItem(item, quantity, "buy", state.balance);
 
   toast(
@@ -103,7 +136,7 @@ function processDay() {
     state.env.generateWeather();
     state.gross = 0;
 
-    // loop through all inventory
+    // loop through all inventory for sales
     state.stock.stock.forEach(el => {
       // find demand
       const demand = state.stock.getDemand(el.item, state.env.getWeather());
@@ -121,8 +154,8 @@ function processDay() {
       state.balance += sale[0];
     });
 
-    //clear current markup
-    inventoryView.clearInventory();
+    // Print the report
+    dailyReport();
 
     //update the UI
     updateUI();
@@ -157,3 +190,21 @@ function toast(message) {
     elements.toast.className = elements.toast.className.replace("show", "");
   }, 3000);
 }
+
+/* TO BE DELETED
+import imgBurger from "../img/burger.svg";
+import imgSoftdrink from "../img/softdrink.png";
+import imgIcecream from "../img/icecream.png";
+import imgHotdog from "../img/hotdog.png";
+import imgDonut from "../img/donut.png";
+import imgChips from "../img/chips.png";
+
+
+function updateImages() {
+    elements.burgerImg.src = imgBurger;
+    elements.softdrinkImg.src = imgSoftdrink;
+    elements.icecreamImg.src = imgIcecream;
+    elements.hotdogImg.src = imgHotdog;
+    elements.donutImg.src = imgDonut;
+    elements.chipsImg.src = imgChips;
+  } */

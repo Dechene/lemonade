@@ -25,7 +25,7 @@ export default class Inventory {
       w54,
       w32,
       w1,
-      icon
+      icon,
     };
 
     this.stock.push(item);
@@ -39,12 +39,11 @@ export default class Inventory {
 
     if (type === "buy") {
       value = this.stock[index].cost * quantity;
-      
+
       // Can they afford it?
       if (value > balance) return [-1, -1];
 
       this.stock[index].quantity += quantity;
-
     } else if (type === "sell") {
       if (quantity > this.stock[index].quantity) {
         quantity = this.stock[index].quantity;
@@ -70,4 +69,15 @@ export default class Inventory {
 
     return demand;
   }
+
+  //if the stock has a shelflife of 1 day, throw it all away
+  getWasted(item) {
+    let waste = 0;
+
+    if (item.wasted) {
+      waste = item.quantity;
+      item.quantity = 0;
+    }
+    return waste;
+  };
 }

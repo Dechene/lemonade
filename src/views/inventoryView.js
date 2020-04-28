@@ -4,11 +4,19 @@ export const renderInventoryImages = item => {
   const markup = `
         <div class="dropdown notification" data-item="${item.item}">
         <span class="badge">${item.quantity}</span>
-          <img id="id-${item.item}" height='75px' width='75px' src="/img/${item.icon}.png" class="stock"  />    
+          <img id="id-${item.item}" height='75px' width='75px' src="/img/${
+    item.icon
+  }.png" class="stock"  />    
           <div class="dropdown-content">
-            <div data-item="${item.item}" data-quantity="10">+10 units for $${item.cost * 10} </div>
-            <div data-item="${item.item}" data-quantity="25">+25 units for $${item.cost * 25} </div>
-            <div data-item="${item.item}" data-quantity="50">+50 units for $${item.cost * 50} </div>
+            <div data-item="${item.item}" data-quantity="10">+10 units for $${
+    item.cost * 10
+  } </div>
+            <div data-item="${item.item}" data-quantity="25">+25 units for $${
+    item.cost * 25
+  } </div>
+            <div data-item="${item.item}" data-quantity="50">+50 units for $${
+    item.cost * 50
+  } </div>
           </div>
         </div>        
        `;
@@ -24,25 +32,27 @@ export const renderInventorySummary = (day, balance) => {
 };
 
 export const clearInventory = () => {
-  elements.sellLedger.innerHTML = `<tr><th>Item</th><th>Sell Price</th><th>Number Sold</th><th>Profit</th></tr>`;
-  elements.sellSummary.innerHTML = "";
+  elements.sellWaste.innerHTML = "";
   elements.inventoryImages.innerHTML = "";
+};
+
+export const clearSales = () => {
+  elements.sellLedger.innerHTML = `<tr><th>Item</th><th>Sell Price</th><th>Number Sold</th><th>Profit</th></tr>`;
+  //elements.sellSummary.innerHTML = "";
 };
 
 export const renderSale = item => {
   const markup = `<tr>
             <td>${item.item}</td>
-            <td>${item.sell}</td>
+            <td>$${item.sell}</td>
             <td>${item.numSold}</td>
             <td>$${item.numSold * item.sell}</td>
         </tr>`;
   return markup;
-  //elements.saleList.insertAdjacentHTML("beforeend", markup);
 };
 
-export function renderSales (markup){
+export function renderSales(markup) {
   elements.sellLedger.insertAdjacentHTML("beforeend", markup);
-
 }
 
 export const renderSalesTitle = day => {
@@ -51,8 +61,17 @@ export const renderSalesTitle = day => {
   elements.sellTitle.innerHTML = markup;
 };
 
-export const renderSalesSummary = (weather, profit) => {
-  const markup = `On this ${weather} day, you made ${profit} profit!`;
+export const renderSalesLedger = (day, profit, balance) => {
+  const markup = `<div>Day #${day} - Profit: $${profit} - Ending Balance: $${balance}</div>`;
+  elements.sellSummary.insertAdjacentHTML("afterbegin", markup);
+};
 
-  elements.sellSummary.innerHTML = markup;
+export const renderSalesHeader = (day, weather) => {
+  const markup = `<div>Day #${day} - Weather: ${weather}</div>`;
+  elements.sellSummary.insertAdjacentHTML("afterbegin", markup);
+};
+
+export const renderWastage = (day, item, quantity, value) => {
+  const markup = `<div>Day #${day} - You had to throw away ${quantity} ${item}'s worth ${value}</div>`;
+  elements.sellSummary.insertAdjacentHTML("afterbegin", markup);
 };

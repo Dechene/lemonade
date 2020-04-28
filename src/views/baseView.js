@@ -5,6 +5,7 @@ export const elements = {
   sellTitle: document.querySelector(".sell-title"),
   sellSummary: document.querySelector(".sell-summary"),
   sellLedger: document.querySelector(".sell-ledger"),
+  sellWaste: document.querySelector(".sell-waste"),
 
   newGame: document.querySelector(".btn-new"),
   nextDay: document.querySelector(".btn-nextDay"),
@@ -17,4 +18,5 @@ export const elements = {
   hotdogImg: document.getElementById("id-hotdog"),
   donutImg: document.getElementById("id-donut"),
   chipsImg: document.getElementById("id-chips"),
+  footballImg: document.getElementById("id-nextDay"),
 };

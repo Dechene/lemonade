@@ -55,6 +55,22 @@ body {
 }
 
 /**********************************************
+*** SELL  
+**********************************************/
+
+.sell-report{
+  background-color: #f2f2f2;
+  color: black;
+  font-size: 14px;
+
+}
+
+.sell-summary{
+  overflow-y:auto;
+  height: 200px;
+}
+
+/**********************************************
 *** buy
 **********************************************/
 
@@ -125,15 +141,16 @@ button:focus {
   outline: none;
 }
 
-i {
+.football {
   color: #eb4d4d;
   display: inline-block;
   margin-right: 15px;
   font-size: 32px;
   line-height: 1;
   vertical-align: text-top;
-  margin-top: -4px;
+  margin-top: 50px;
   transition: margin 0.3s;
+  cursor: pointer;
 }
 
 .btn-new {
@@ -152,6 +169,8 @@ i {
 .dropdown {
   position: relative;
   display: inline-block;
+  transition-delay: 1s;
+  cursor: pointer;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -162,8 +181,12 @@ i {
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  left: 100%;
+  left: 80%;
   top: 0%;
+  transition-delay: 1s;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 /* Divs inside dropdown */
@@ -177,6 +200,8 @@ i {
 /* Change color of dropdown links on hover */
 .dropdown-content div:hover {
   background-color: #ddd;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 /* Show the dropdown menu on hover */
@@ -322,4 +347,52 @@ i {
 }
 .stock:hover {
   transform: scale(1.1);
+}
+
+/**********************************************
+*** FOOTBALL IMAGE
+**********************************************/
+
+.football:hover {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.6s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(-1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-2px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-2px, -2px) rotate(-3deg);
+  }
+  30% {
+    transform: translate(-3px, -3px) rotate(-5deg);
+  }
+  40% {
+    transform: translate(-2px, -2px) rotate(-2deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(1deg);
+  }
+  60% {
+    transform: translate(0px, 0px) rotate(3deg);
+  }
+  70% {
+    transform: translate(1px, 1px) rotate(5deg);
+  }
+  80% {
+    transform: translate(2px, 2px) rotate(3deg);
+  }
+  90% {
+    transform: translate(2px, 2px) rotate(1deg);
+  }
+  100% {
+    transform: translate(1px, 1px) rotate(-1deg);
+  }
 }
