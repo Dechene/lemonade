@@ -41,17 +41,18 @@ function init() {
 
   // Generate default items
   //addItem(item, quantity, cost, sell, wasted, w6, w54, w32, w1, iconname)
-  state.stock.addItem("soft drink",   0, 1, 5, false, 200, 120, 80, 40, "softdrink");
-  state.stock.addItem("icecream",     0, 2, 4, false, 250, 160, 80, 60, "icecream");
-  state.stock.addItem("hotdog",       0, 3, 7, true, 20, 40, 80, 110, "hotdog");
-  state.stock.addItem("cheeseburger", 0, 2, 6, true, 20, 40, 80, 110, "burger");
-  state.stock.addItem("jam donut",    0, 2, 4, false, 20, 40, 80, 110, "donut");
-  state.stock.addItem("hot chip",     0, 3, 5, true, 160, 220, 200, 220, "chips");
+  state.stock.addItem("soft drink", 0, 1, 5, false, "softdrink", 20, 25, 35, 50, 70, 100);
+  state.stock.addItem("icecream", 0, 2, 4, false, "icecream", 5, 10, 15, 30, 60, 100);
+  state.stock.addItem("hotdog", 0, 3, 7, true, "hotdog", 30, 40, 50, 40, 30, 20);
+  state.stock.addItem("cheeseburger", 0, 2, 6, true, "burger", 45, 40, 30, 30, 20, 20);
+  state.stock.addItem("jam donut", 0, 2, 4, false, "donut", 60, 50, 30, 30, 20, 20);
+  state.stock.addItem("hot chip", 0, 3, 5, true, "chips", 20, 50, 70, 70, 65, 60);
 
   // Onetime set src for buttons
   elements.footballImg.src = imgFootball;
 
   updateUI();
+  inventoryView.renderDailySummaryForecast(state.env.getWeatherDesc(), 1, state.balance);
 }
 
 // Empty fields, render stock images, and balance
@@ -91,7 +92,7 @@ function dailySummary() {
     inventoryView.renderDailySummaryLedger(day, state.gross, state.balance);
 
     // spin up tomorrows weather and print it
-    inventoryView.renderDailySummaryForecast(state.env.getWeatherDesc(), day + 1);
+    inventoryView.renderDailySummaryForecast(state.env.getWeatherDesc(), day + 1, state.balance);
   }
 }
 
@@ -101,7 +102,13 @@ function promptPurchase(item, quantity) {
   const sale = state.stock.processItem(item, quantity, "buy", state.balance);
 
   state.balance -= sale[0];
-  inventoryView.toast(`You bought ${quantity} ${item}s for $${sale[0]}!`);
+
+  // If a zero is returned, they ran out of money!
+  if (sale[0] === 0) {
+    inventoryView.toast(`Uh-oh, you can't afford that!`);
+  } else {
+    inventoryView.toast(`You bought ${quantity} ${item}s for $${sale[0]}!`);
+  }
 
   updateUI();
 }
@@ -110,7 +117,6 @@ function promptPurchase(item, quantity) {
 function processDay() {
   // Check if game is live
   if (state.env.updateDay()) {
-    
     state.gross = 0;
 
     state.stock.stock.forEach((el, i) => {
@@ -150,8 +156,10 @@ elements.nextDay.addEventListener("click", e => {
 
 // Listen to stock item purchase clicks
 elements.inventoryImages.addEventListener("click", e => {
-  const item = e.target.dataset.item;
-  const quantity = parseInt(e.target.dataset.quantity, 10);
+  try {
+    const item = e.target.dataset.item;
+    const quantity = parseInt(e.target.dataset.quantity, 10);
 
-  promptPurchase(item, quantity);
+    promptPurchase(item, quantity);
+  } catch {}
 });

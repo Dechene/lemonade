@@ -12,10 +12,13 @@ export const renderInventoryImages = item => {
         <div class="dropdown notification" data-item="${item.item}">
         <span class="badge">${item.quantity}</span>
           <img id="id-${item.item}" src="/img/${item.iconname}.png" class="stock" />   
-          <div class="dropdown-content">
-            <div data-item="${item.item}" data-quantity="10">+10 units for $${item.cost * 10} </div>
-            <div data-item="${item.item}" data-quantity="25">+25 units for $${item.cost * 25} </div>
-            <div data-item="${item.item}" data-quantity="50">+50 units for $${item.cost * 50} </div>
+          <div id="id-${item.iconname}-drop" class="dropdown-content">
+            <div><img src="/img/${item.iconname}.png" class="stock-tiny" /> - $${
+    item.cost
+  } each </div>
+            <div data-item="${item.item}" data-quantity="10">Buy 10 for $${item.cost * 10}? </div>
+            <div data-item="${item.item}" data-quantity="25">Buy 25 for $${item.cost * 25}? </div>
+            <div data-item="${item.item}" data-quantity="50">Buy 50 for $${item.cost * 50}? </div>
           </div>
         </div>        
        `;
@@ -72,8 +75,8 @@ export const renderDailySummaryHeader = (day, balance) => {
 };
 
 // The next days weather forecast
-export const renderDailySummaryForecast = (weather, day) => {
-  const markup = `<div>The weather for day ${day} should be ${weather}!</div>`;
+export const renderDailySummaryForecast = (weather, day, balance) => {
+  const markup = `<div>Day ${day} weather should be ${weather} - Starting Balance: ${balance}</div>`;
   elements.sellSummary.insertAdjacentHTML("afterbegin", markup);
 };
 
@@ -82,6 +85,7 @@ export const toast = message => {
   // Add the "show" class to DIV and set the message
   elements.toast.innerText = message;
   elements.toast.classList.toggle("show");
+  elements.toast.classList.display = "none";
 
   setTimeout(function () {
     elements.toast.className = elements.toast.className.replace("show", "");

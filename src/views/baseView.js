@@ -9,6 +9,7 @@ export const elements = {
   priceListImages: document.querySelector(".pricelist-images"),
 
   toast: document.getElementById("toast"),
+  dropdown: document.querySelectorAll("dropdown-content"),
 
   // Buttons
   newGame: document.querySelector(".btn-new"),

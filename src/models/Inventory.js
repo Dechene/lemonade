@@ -4,18 +4,20 @@ export default class Inventory {
   }
 
   // Add a new item to the store
-  addItem(item, quantity, cost, sell, wasted, w6, w54, w32, w1, iconname) {
+  addItem(item, quantity, cost, sell, wasted, iconname, d1, d2, d3, d4, d5, d6) {
     const stock = {
       item,
       quantity,
       cost,
       sell,
       wasted,
-      w6,
-      w54,
-      w32,
-      w1,
       iconname,
+      d1,
+      d2,
+      d3,
+      d4,
+      d5,
+      d6,
     };
 
     this.stock.push(stock);
@@ -31,7 +33,7 @@ export default class Inventory {
       value = this.stock[index].cost * quantity;
 
       // Can they afford it?
-      if (value > balance) return [-1, -1];
+      if (value > balance) return [0, 0];
 
       this.stock[index].quantity += quantity;
     } else if (type === "sell") {
@@ -40,13 +42,11 @@ export default class Inventory {
       }
       value = this.stock[index].sell * quantity;
       this.stock[index].quantity -= quantity;
-      
+
       //details of this transaction
       this.stock[index].lastSold = quantity;
       this.stock[index].lastValue = value;
-
     }
-
 
     return [value, quantity];
   }
@@ -57,10 +57,12 @@ export default class Inventory {
 
     const index = this.stock.findIndex(el => el.item === item);
 
-    if (weather === 1) demand = this.stock[index].w1;
-    if (weather === 3) demand = this.stock[index].w32;
-    if (weather === 5) demand = this.stock[index].w54;
-    if (weather === 6) demand = this.stock[index].w6;
+    if (weather === 1) demand = this.stock[index].d1;
+    if (weather === 2) demand = this.stock[index].d2;
+    if (weather === 3) demand = this.stock[index].d3;
+    if (weather === 4) demand = this.stock[index].d4;
+    if (weather === 5) demand = this.stock[index].d5;
+    if (weather === 6) demand = this.stock[index].d6;
 
     return demand;
   }
