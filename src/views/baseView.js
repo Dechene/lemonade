@@ -4,9 +4,10 @@ export const elements = {
   balance: document.querySelector(".balance"),
 
   // Sales side
-  sellTitle: document.querySelector(".sell-title"),
   sellSummary: document.querySelector(".sell-summary"),
   sellLedger: document.querySelector(".sell-ledger"),
+  priceListImages: document.querySelector(".pricelist-images"),
+
   toast: document.getElementById("toast"),
 
   // Buttons

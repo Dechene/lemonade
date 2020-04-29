@@ -40,7 +40,13 @@ export default class Inventory {
       }
       value = this.stock[index].sell * quantity;
       this.stock[index].quantity -= quantity;
+      
+      //details of this transaction
+      this.stock[index].lastSold = quantity;
+      this.stock[index].lastValue = value;
+
     }
+
 
     return [value, quantity];
   }

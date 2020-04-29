@@ -40,12 +40,13 @@ function init() {
   window.state = state;
 
   // Generate default items
-  state.stock.addItem("soft drink", 0, 1, 2, false, 200, 120, 80, 40, "softdrink");
-  state.stock.addItem("icecream", 0, 2, 4, false, 250, 160, 80, 60, "icecream");
-  state.stock.addItem("hotdog", 0, 1, 3, true, 20, 40, 80, 110, "hotdog");
-  state.stock.addItem("cheeseburger", 0, 1, 3, true, 20, 40, 80, 110, "burger");
-  state.stock.addItem("jam donut", 0, 1, 3, false, 20, 40, 80, 110, "donut");
-  state.stock.addItem("hot chip", 0, 1, 2, true, 160, 220, 200, 220, "chips");
+  //addItem(item, quantity, cost, sell, wasted, w6, w54, w32, w1, iconname)
+  state.stock.addItem("soft drink",   0, 1, 5, false, 200, 120, 80, 40, "softdrink");
+  state.stock.addItem("icecream",     0, 2, 4, false, 250, 160, 80, 60, "icecream");
+  state.stock.addItem("hotdog",       0, 3, 7, true, 20, 40, 80, 110, "hotdog");
+  state.stock.addItem("cheeseburger", 0, 2, 6, true, 20, 40, 80, 110, "burger");
+  state.stock.addItem("jam donut",    0, 2, 4, false, 20, 40, 80, 110, "donut");
+  state.stock.addItem("hot chip",     0, 3, 5, true, 160, 220, 200, 220, "chips");
 
   // Onetime set src for buttons
   elements.footballImg.src = imgFootball;
@@ -61,6 +62,7 @@ function updateUI() {
 
   state.stock.stock.forEach(el => {
     inventoryView.renderInventoryImages(el);
+    inventoryView.renderPriceImages(el);
   });
 
   inventoryView.renderAccountBalance(state.env.curDay, state.balance);
@@ -71,23 +73,25 @@ function dailySummary() {
   let markup = "";
   const day = state.env.curDay;
 
-  inventoryView.clearSales();
-
   // update inventory and sales tables
-  state.stock.stock.forEach(el => (markup += inventoryView.renderSale(el)));
+  //state.stock.stock.forEach(el => (markup += inventoryView.renderSale(el)));
 
   if (day > 0) {
-    inventoryView.renderSalesTitle(day);
     if (markup) inventoryView.renderSales(markup);
-    inventoryView.renderDailySummaryHeader(day, state.env.getWeatherDesc());
+    inventoryView.renderDailySummaryHeader(day, state.balance);
 
     //loop through all inventory for wastage
     state.stock.stock.forEach(el => {
+      if (el.lastSold > 0) inventoryView.renderDailySummarySale(day, el);
+
       const qty = state.stock.getWasted(el);
       if (qty) inventoryView.renderDailySummaryWastage(day, el.item, qty, qty * el.cost);
     });
 
     inventoryView.renderDailySummaryLedger(day, state.gross, state.balance);
+
+    // spin up tomorrows weather and print it
+    inventoryView.renderDailySummaryForecast(state.env.getWeatherDesc(), day + 1);
   }
 }
 
@@ -106,19 +110,21 @@ function promptPurchase(item, quantity) {
 function processDay() {
   // Check if game is live
   if (state.env.updateDay()) {
-    state.env.generateWeather();
+    
     state.gross = 0;
 
-    state.stock.stock.forEach(el => {
+    state.stock.stock.forEach((el, i) => {
       // find demand
       const demand = state.stock.getDemand(el.item, state.env.getWeather());
       // make sales
       const sale = state.stock.processItem(el.item, demand, "sell", state.balance);
 
-      state.gross += sale[0];
       el.numSold = sale[1];
+      state.gross += sale[0];
       state.balance += sale[0];
     });
+
+    state.env.generateWeather();
 
     // Print the report
     dailySummary();
