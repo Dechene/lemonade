@@ -3,6 +3,7 @@ import Environment from "../models/Environment";
 
 import { elements } from "./../views/baseView";
 import * as inventoryView from "./../views/inventoryView";
+import * as environmentView from "./../views/environmentView";
 
 import "./../css/style.css";
 
@@ -13,6 +14,13 @@ import imgHotdog from "../img/hotdog.png";
 import imgDonut from "../img/donut.png";
 import imgChips from "../img/chips.png";
 import imgFootball from "../img/football.png";
+
+import weather1 from "../img/w-1.png";
+import weather2 from "../img/w-2.png";
+import weather3 from "../img/w-3.png";
+import weather4 from "../img/w-4.png";
+import weather5 from "../img/w-5.png";
+import weather6 from "../img/w-6.png";
 
 init();
 /*
@@ -50,9 +58,16 @@ function init() {
 
   // Onetime set src for buttons
   elements.footballImg.src = imgFootball;
+  elements.weatherImg1.src = weather1;
+  elements.weatherImg2.src = weather2;
+  elements.weatherImg3.src = weather3;
+  elements.weatherImg4.src = weather4;
+  elements.weatherImg5.src = weather5;
+  elements.weatherImg6.src = weather6;
 
   updateUI();
   inventoryView.renderDailySummaryForecast(state.env.getWeatherDesc(), 1, state.balance);
+  environmentView.renderWeather(state.env.getWeather());
 }
 
 // Empty fields, render stock images, and balance
@@ -93,6 +108,7 @@ function dailySummary() {
 
     // spin up tomorrows weather and print it
     inventoryView.renderDailySummaryForecast(state.env.getWeatherDesc(), day + 1, state.balance);
+    environmentView.renderWeather(state.env.getWeather());
   }
 }
 

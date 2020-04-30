@@ -12,15 +12,8 @@
   </head>
   <body>
     <div class="wrapper clearfix">
-      <button class="btn-new title">New game</button>
-
-      <div class="left-panel active">
+      <div class="left-panel panel">
         <div id="account">
-          <div class="title">Account Balance:</div>
-          <div class="balance">
-            You are on Day 1 of 10, and you currently have $100.
-          </div>
-
           <div id="toast">Popup message</div>
 
           <div class="inventory-images">
@@ -43,18 +36,32 @@
               <img id="id-chips" class="stock" />
             </div>
           </div>
-
-          <div class="btn-nextDay title">
-            <div>
-              <img id="id-nextDay" class="football" />
-            </div>
-            <div>Head to the footy!</div>
-          </div>
         </div>
       </div>
 
-      <div class="right-panel active">
-        
+      <div class="centre-panel panel">
+        <div class="centre-top">
+          <button class="btn-new title">New game</button>
+        </div>
+
+        <div>
+          <img id="id-weather" />
+        </div>
+
+        <div class="title">Account Balance:</div>
+        <div class="balance">
+          $100
+        </div>
+
+        <div class="btn-nextDay title centre-bottom">
+          <div>
+            <img id="id-nextDay" class="football" />
+          </div>
+          <div>Head to the footy!</div>
+        </div>
+      </div>
+
+      <div class="right-panel panel">
         <div class="pricelist-images">
           <img id="id-burger-sml" class="stock-sml" />
           <img id="id-softdrink-sml" class="stock-sml" />
@@ -76,9 +83,18 @@
           <div class="sell-summary"></div>
         </div>
       </div>
+    </div>
 
+    <div class="weather-images">
+      <img id="id-weather-1" class="weather" />
+      <img id="id-weather-2" class="weather" />
+      <img id="id-weather-3" class="weather" />
+      <img id="id-weather-4" class="weather" />
+      <img id="id-weather-5" class="weather" />
+      <img id="id-weather-6" class="weather" />
     </div>
   </body>
 
   <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
+  <!-- Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
 </html>

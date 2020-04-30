@@ -23,4 +23,12 @@ export const elements = {
   donutImg: document.getElementById("id-donut"),
   chipsImg: document.getElementById("id-chips"),
   footballImg: document.getElementById("id-nextDay"),
+
+  weatherIcon: document.getElementById("id-weather"),
+  weatherImg1: document.getElementById("id-weather-1"),
+  weatherImg2: document.getElementById("id-weather-2"),
+  weatherImg3: document.getElementById("id-weather-3"),
+  weatherImg4: document.getElementById("id-weather-4"),
+  weatherImg5: document.getElementById("id-weather-5"),
+  weatherImg6: document.getElementById("id-weather-6"),
 };
